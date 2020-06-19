@@ -29,13 +29,19 @@ impl Bottom {
         };
         Ok(s)
     }
-    pub fn return_rect(&self) -> ggez::graphics::Rect {
+    pub fn return_rect(&self) -> graphics::Rect {
         graphics::Rect {
             x: self.pos_x,
             y: self.pos_y,
             w: self.width,
             h: self.height,
         }
+    }
+    fn selfprint(&self) {
+        println!(
+            "ground = pos_x:{} pos_y:{} width:{} height:{} color:{:?}",
+            self.pos_x, self.pos_y, self.width, self.height, self.color
+        );
     }
     pub fn draw(&self, ctx: &mut ggez::Context) -> ggez::GameResult {
         let rect = graphics::Mesh::new_rectangle(
@@ -51,6 +57,7 @@ impl Bottom {
         )
         .unwrap();
         graphics::draw(ctx, &rect, (na::Point2::new(self.pos_x, self.pos_y),))?;
+        self.selfprint();
         Ok(())
     }
 }

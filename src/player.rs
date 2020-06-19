@@ -36,7 +36,7 @@ impl Rec {
     }
     fn selfprint(&self) {
         println!(
-            "pos_x:{} pos_y:{} width:{} height:{} color:{:?} vel:{} ",
+            "player = pos_x:{} pos_y:{} width:{} height:{} color:{:?} vel:{} ",
             self.pos_x, self.pos_y, self.width, self.height, self.color, self.vel
         );
     }
@@ -44,8 +44,8 @@ impl Rec {
         graphics::Rect {
             x: self.pos_x,
             y: self.pos_y,
-            w: self.width,
-            h: self.height,
+            w: 26.0,
+            h: 26.0,
         }
         .overlaps(&other)
     }
@@ -55,7 +55,7 @@ impl Rec {
     }
 
     pub fn apply_force(&mut self, force: f32) {
-        self.vel += force;
+        self.vel -= force;
     }
     pub fn update(&mut self, other: &Rect, force: f32) {
         if self.collides_with_ground(&other) {
@@ -78,7 +78,7 @@ impl Rec {
             self.color.into(),
         )
         .unwrap();
-        graphics::draw(ctx, &rect, (na::Point2::new(0.0, 0.0),))?;
+        graphics::draw(ctx, &rect, (na::Point2::new(self.pos_x, self.pos_y),))?;
         self.selfprint();
         Ok(())
     }
