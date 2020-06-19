@@ -1,7 +1,6 @@
 use ggez;
 use ggez::event;
 use ggez::graphics;
-use ggez::nalgebra as na;
 use ggez::timer::sleep;
 use std::time::Duration;
 
@@ -36,7 +35,8 @@ impl MainState {
 }
 impl event::EventHandler for MainState {
     fn update(&mut self, ctx: &mut ggez::Context) -> ggez::GameResult {
-        self.player.update(&self.ground.return_rect(), self.gravity);
+        self.player
+            .update(&self.ground.return_rect(), self.gravity, ctx);
         sleep(Duration::new(0, 5));
         Ok(())
     }

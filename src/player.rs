@@ -1,10 +1,9 @@
 use ggez;
-use ggez::event;
+use ggez::event::{KeyCode};
 use ggez::graphics;
 use ggez::graphics::Rect;
+use ggez::input::keyboard;
 use ggez::nalgebra as na;
-use ggez::timer::sleep;
-use std::time::Duration;
 
 pub struct Rec {
     pos_x: f32,
@@ -57,12 +56,25 @@ impl Rec {
     pub fn apply_force(&mut self, force: f32) {
         self.vel -= force;
     }
-    pub fn update(&mut self, other: &Rect, force: f32) {
+    pub fn update(&mut self, other: &Rect, force: f32, ctx: &mut ggez::Context) {
         if self.collides_with_ground(&other) {
             self.vel = 0.0;
             println!("is colliding");
         } else {
             self.change_pos(force);
+        }
+        if keyboard::is_key_pressed(ctx, KeyCode::Space)
+            || keyboard::is_key_pressed(ctx, KeyCode::Up)
+        {
+            self.apply_force(0.5);
+            self.pos_y -= 5.0;
+            println!("SPACE PRESSED");
+        }
+        if keyboard::is_key_pressed(ctx, KeyCode::Right) {
+            self.pos_x += 10.0;
+        }
+        if keyboard::is_key_pressed(ctx, KeyCode::Left) {
+            self.pos_x -= 10.0;
         }
     }
     pub fn draw(&self, ctx: &mut ggez::Context) -> ggez::GameResult {

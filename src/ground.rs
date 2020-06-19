@@ -1,8 +1,6 @@
 use ggez;
-use ggez::event;
 use ggez::graphics;
 use ggez::nalgebra as na;
-use std::time::Duration;
 
 pub struct Bottom {
     pos_x: f32,
