@@ -91,7 +91,7 @@ impl Rec {
         )
         .unwrap();
         graphics::draw(ctx, &rect, (na::Point2::new(self.pos_x, self.pos_y),))?;
-        self.selfprint();
+        // self.selfprint();
         Ok(())
     }
 }

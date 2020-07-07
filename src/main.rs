@@ -55,6 +55,6 @@ pub fn main() -> ggez::GameResult {
     let (ctx, event_loop) = &mut cb.build()?;
     let player = Rec::new(70.0, 30.0, 50.0, 50.0, [1.0, 0.6, 0.2, 1.0], 1.0);
     let ground = Bottom::new(0.0, 200.0, 800.0, 200.0, [0.0, 0.0, 1.0, 1.0]);
-    let state = &mut MainState::new([0.0, 1.0, 0.0, 1.0], player.unwrap(), ground.unwrap(), 0.05)?;
+    let state = &mut MainState::new([0.0, 1.0, 0.0, 1.0], player.unwrap(), ground.unwrap(), 0.5)?;
     event::run(ctx, event_loop, state)
 }
